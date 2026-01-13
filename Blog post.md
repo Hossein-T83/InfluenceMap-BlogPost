@@ -2,7 +2,9 @@
 
 ## Abstract
 
-[This research is focused on using influence map to help game AI navigate better and act smarter in conclusion of using influence data. In this article I will break down the impacts of influence map on game ai, different algorithms available and its usage in game industry]
+This research is focused on using influence map to help game AI navigate better and act smarter in conclusion of using influence data. Influence map has become a technique that is being used in many games to achieve this goal.
+
+In this article I will break down the impacts of influence map on game ai, different algorithms available and its usage in game industry
 
 ---
 
@@ -10,7 +12,7 @@
 
 1. [Introduction](#introduction)
 2. [Background and Related Work](#background-and-related-work)
-3. [Research Questions](#research-questions)
+3. [If you should use influence map](#If-you-should-use-influence-map)
 4. [Methodology](#methodology)
 5. [Implementation](#implementation)
 6. [Results](#results)
@@ -24,15 +26,18 @@
 
 ### Motivation
 
-[Why this research matters]
+Game AI plays an important role when it comes to making player's experience immersive and since nowadays, most games have a kind of game AI such as ai companians, enemies or npcs, it's essential to make these AIs smarter in order to improve player's experience quality. Influence map impacts:
 
-### Problem Statement
-
-[What problem are you solving]
+- **Enviromental awareness :** Influence map can be used to increase the ai's awareness by inserting data and summarizing what's happening around them. This helps them with their decision making
+- **Prediction :** Influence map can also be used for predicting future events. Like guessing where the player might be based on the last seen position and direction.
+- **Memory :** Influence data can be used as some sort of memory where the ai uses the previously inserted data to know what happend and how to act.
 
 ### Scope
 
-[What you cover and what you don't]
+- What is influence map
+- Different approaches in the insdustry
+- When should you use influence map and when not
+
 
 ---
 
@@ -52,11 +57,8 @@
 
 ---
 
-## Research Questions
+## If you should use influence map
 
-1. [Question 1]
-2. [Question 2]
-3. [Question 3]
 
 ---
 
