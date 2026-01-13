@@ -35,8 +35,8 @@ Game AI plays an important role when it comes to making player's experience imme
 ### Scope
 
 - What is influence map
-- Different approaches in the insdustry
 - When should you use influence map and when not
+- Different approaches in the insdustry
 
 
 ---
@@ -45,20 +45,24 @@ Game AI plays an important role when it comes to making player's experience imme
 
 ### Influence Mapping
 
-[Overview of influence mapping in games]
+Influence map can be represented in any kind of map like 2d grids, graph, area graph and ... but it is important to have a navigation mesh which influence map can operate on because basically how influence map works is that it inserts data on a certain vertex then propagates that through the map.
 
 ### Propagation Algorithms
 
-[Brief intro to different approaches]
+The main concept behind influence map is propagation. It means how you spread data over the map. After doing my research I came across 2 different propagation algorithm that are mostly used in the industry.
+- Diffusion based propagation
+- Flood-fill propagation
+
+Both have their own pros and cons which I'll talk about it in the upcoming sections.
 
 ### Existing Implementations
 
-[What others have done]
+[Showing gdc and dishonored 2]
 
 ---
 
 ## If you should use influence map
-
+Using ifluence map is not always the best choice for the game because in some games, the trade offs are just not worth it. If the world is too simple meaning map is small and there aren't lots of terrains on the map, it is a sign that you might not really need an influence map! These kind of worlds/maps can be simplified by distance-based calculation instead benefiting from influence map.
 
 ---
 
