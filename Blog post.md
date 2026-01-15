@@ -56,7 +56,6 @@ The main concept behind influence map is propagation. It means how you spread da
 Both have their own pros and cons which I'll talk about it in the upcoming sections.
 
 ### Existing Implementations
-![alt text](image-1.png)
 ![alt text](image.png)
 
 This is from Laurent Couvidou article on Dishonored 2 implementation which shows how influence propagates in order to estimate where to player will be. I'll explain the algorithm in the implementation section.
@@ -236,7 +235,13 @@ for (int i = 0; i < iteration; i++)
     }
 }
 ```
+I am only using thhis algorithm for predicting player's future position by ai agents. When ai agents lose sight of player they trigger the OnLoseSight event which propagates 2 influence layers. First based on last seen player's dircetion it propagates influence (Called heat in this case) only towards player's movement. The next layer is barrier which indicates where player can't be based on the last seen direction. How algorithm works is that each iteration, heated cells, make their neighbors heated and at the same time their own heat decays b 0.1f(which obviously can be tweaked by designers). Barrier has the same process excpet  there is no decay.
 
+![alt text](image-1.png)
+
+After that you can take the average of heated cells to have the prdiction for player's position.
+
+![alt text]({A4F376B2-44CA-447B-9CDC-53D5716A9300}.png)
 
 ### Integration
 
@@ -248,7 +253,19 @@ for (int i = 0; i < iteration; i++)
 
 ### Performance Metrics
 
-[Numbers, graphs, tables]
+![alt text]({F75FA02F-7272-4935-8DCF-F32EC4B1BC24}.png)
+
+I tested the program to find its limit and based on the results, as you can see the scability of the algorithm and that it perform acceptable doing even more than 50 propagates per frame.
+
+![alt text](image-14.png)
+
+To test the system on bigger maps, same test was done on bigger map. Suprisingly the result was almost the same showing that the system can do well on larger maps too.
+
+![alt text]({3BFC4855-1496-4E79-80EE-7237C06E4D6E}.png)
+
+The results shows that influence is not very depandant on number of agents and can handle more than 1000. However, it is the process of knowing where to insert and propagate influence is something that might increase based on number of agents.
+
+
 
 ### Behavioral Outcomes
 
@@ -294,9 +311,16 @@ for (int i = 0; i < iteration; i++)
 
 ## References
 
-1. [Reference 1]
-2. [Reference 2]
-3. [Reference 3]
+[GDC talk](https://gdcvault.com/play/1014498/Lay-of-the-Land-Smarter)
+
+[GameAIPro books](https://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter07_Possibility_Maps_for_Opportunistic_AI_and_Believable_Worlds.pdf)
+
+ [Gamedev](https://www.gamedev.net/tutorials/programming/artificial-intelligence/the-core-mechanics-of-influence-mapping-r2799/)
+
+ [Dishonored 2](https://www.gameaipro.com/GameAIProOnlineEdition2021/GameAIProOnlineEdition2021_Chapter06_Flooding_the_Influence_Map_for_Chase_in_Dishonored_2.pdf)
+
+Using influence maps with heuristic search to craft sneak-attack in starcraft
+by © Lucas Critch 
 
 ---
 
