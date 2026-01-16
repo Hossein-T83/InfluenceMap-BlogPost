@@ -202,7 +202,8 @@ Momentum indicates how fast and how far the influence propagates throughout the 
 
 The user chooses a position to insert influence at and then the propagation starts. The optimized version of this algorithm collects vertices' positions and cache them, so that later when we need them it can access it instantly. Next step is collecting the vertices that are already influenced + their neighbors, this means all the vertices that we need. After that, each vertex finds the highest influence value based also on the distance among its neighbors, then mixes the value with the current influence value using momentum.
 
-<video controls src="20260116-1339-21.3155555.mp4" title="Title"></video>
+
+![alt text](20260116-1339-21.3155555.gif)
 
 ### Flood-Fill Algorithm
 
@@ -275,17 +276,17 @@ The results show that influence is not very dependent on the number of agents an
 
 Now AI agents can have a guess of where the player might be when they lose sight of them, instead of going to the last seen position.
 
-<video controls src="20260116-1053-50.1312358.mp4" title="Title"></video>
+![alt text](20260116-1053-50.1312358.gif)
 
 This is AI agents using flood-fill propagation algorithm to predict player's position after losing sights
 
-<video controls src="20260116-1056-07.6969670.mp4" title="Title"></video>
+![alt text](20260116-1056-07.6969670.gif)
 
 And this is AI agents without predicting where the player might be.
 
 **2-Smart state changing**
 
-<video controls src="Screen Recording 2026-01-16 163806.mp4" title="Title"></video>
+![alt text](<Screen Recording 2026-01-16 163806.gif>)
 
 In this video you see enemies (Disks) try to chase the allies (Cylinders) but when they get close and realize they are outnumbered, they stop chasing and go into idle state. On top of that, if they are outnumbered by far they run away to lowest influence on map. The moment the influence difference between enemy and player layer is lowered their state goes back to chasing.
 
@@ -293,7 +294,7 @@ In this video you see enemies (Disks) try to chase the allies (Cylinders) but wh
 
 Using every data available to make the best decision
 
-<video controls src="20260116-0951-31.7247053.mp4" title="Title"></video>
+![alt text](20260116-0951-31.7247053.gif)
 
 Here you can see couple of AI agents that are combining fire and water layers to find the safest spot on map. Fire is danger and water is safe spots therefore, they find the vertex on map that has the highest difference between water and fire which means it's the safest spot.
 
