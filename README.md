@@ -29,7 +29,7 @@ In this article, I will break down the impacts of influence map on game AI, diff
 
 ### Motivation
 
-Game AI plays an crucial role when it comes to making player's experience immersive and since nowadays, most games feature some form of AI such as ai companions, enemies or npcs, it's essential to make these AIs smarter in order to improve player's experience quality and make it more challenging. Influence map impacts:
+Game AI plays a crucial role when it comes to making player's experience immersive and since nowadays, most games feature some form of AI such as AI companions, enemies or NPCs, it's essential to make these AIs smarter in order to improve quality of player's experience and make it more challenging. Influence map impacts:
 
 - **Environmental awareness:** Influence map can be used to increase the ai's awareness by inserting data and summarizing what's happening around them. This helps them with their decision-making
 - **Prediction:** Influence map can also be used for predicting future events. Like guessing where the player might be based on the last seen position and direction.
@@ -71,7 +71,7 @@ Influence map on a 2d grid
 ---
 
 ## If you should use influence map
-Using influence map is not always the best choice for the game because in some games, the trade-offs are just not worth it. If the world is too simple, meaning the map is small and there aren't lots of terrains on the map, it is a sign that you might not really need an influence map! These kind of worlds/maps can be simplified by distance-based calculation instead of benefiting from influence map.
+Using influence map is not always the best choice for the game because in some games, the trade-offs are just not worth it. If the world is too simple, meaning the map is small and there aren't lots of terrains on the map, it is a sign that you might not really need an influence map! These kinds of worlds/maps can be simplified by distance-based calculation instead of benefiting from influence map.
 
 Another factor to consider when you wanna implement influence map is the type of map you're using. Whether you are using 2d grid, waypoint graph, area graph or coarse grid, they can all benefit from influence map, but it's important to take the pros and cons of each map into account because on some maps, like 2d grid it's easier to implement influence map and have more usage, while on others might not be as effective.
 
@@ -117,7 +117,7 @@ void AddStaticInfluence(const glm::vec2& pos,
                         bool flood = false,
                         int iteration = 5);
 ```
-Adding static influence is similar to dynamic, but you can choose if you wanna propagate, which algorithm you wanna use and numbers of iteration on top of that.
+Adding static influence is similar to dynamic, but you can choose if you wanna propagate, which algorithm you wanna use and the number of iteration on top of that.
 
 ```cpp
  const auto& playerMap = m_influence->GetLayer(InfluenceType::PLAYER);
@@ -132,7 +132,7 @@ Adding static influence is similar to dynamic, but you can choose if you wanna p
 
 ### Algorithm Selection
 
-There are many different algorithms that you can use to propagate the influence, but the best ones I found are Gamedev (inspired by GDC talk) diffusion-based propagation algorithm, which is based on gdc talk and Dishonored 2 flood-fill propagation.
+There are many different algorithms that you can use to propagate the influence, but the best ones I found are Gamedev (inspired by GDC talk) diffusion-based propagation algorithm, which is based on GDC talk and Dishonored 2 flood-fill propagation.
 
 **Diffusion-based Propagation (GameDev.net):**
 - Influence spreads gradually from sources using exponential decay
@@ -186,7 +186,7 @@ for (int i : influencedVertices)
 
 influenceLayer = std::move(newLayer);  
 ```
-This code is inspired by gamedev implementation from gdc talk, with a bit of optimization for it work well on a larger scale. Let's break it down :
+This code is inspired by Gamedev implementation from GDC talk, with a bit of optimization for it work well on a larger scale. Let's break it down :
 
 First of all, there are 2 important parameter in this algorithm which dictates how the influence should propagate.
 
@@ -202,7 +202,7 @@ Momentum indicates how fast and how far the influence propagates throughout the 
 
 The user chooses a position to insert influence at and then the propagation starts. The optimized version of this algorithm collects vertices' positions and cache them, so that later when we need them it can access it instantly. Next step is collecting the vertices that are already influenced + their neighbors, this means all the vertices that we need. After that, each vertex finds the highest influence value based also on the distance among its neighbors, then mixes the value with the current influence value using momentum.
 
-[Some videos and pictures]
+<video controls src="20260116-1339-21.3155555.mp4" title="Title"></video>
 
 ### Flood-Fill Algorithm
 
@@ -249,12 +249,6 @@ After that, you can take the average of heated cells (Based on influence values 
 
 ![alt text]({A4F376B2-44CA-447B-9CDC-53D5716A9300}.png)
 
-[Some videos and pictures]
-
-### Integration
-
-[How they work together]
-
 ---
 
 ## Results
@@ -279,17 +273,29 @@ The results show that influence is not very dependent on the number of agents an
 
 **1-Predicts player position**
 
-[Compare with and without prediction]
-
 Now AI agents can have a guess of where the player might be when they lose sight of them, instead of going to the last seen position.
+
+<video controls src="20260116-1053-50.1312358.mp4" title="Title"></video>
+
+This is AI agents using flood-fill propagation algorithm to predict player's position after losing sights
+
+<video controls src="20260116-1056-07.6969670.mp4" title="Title"></video>
+
+And this is AI agents without predicting where the player might be.
 
 **2-Smart state changing**
 
-[Show how the change state]
+<video controls src="Screen Recording 2026-01-16 163806.mp4" title="Title"></video>
+
+In this video you see enemies (Disks) try to chase the allies (Cylinders) but when they get close and realize they are outnumbered, they stop chasing and go into idle state. On top of that, if they are outnumbered by far they run away to lowest influence on map. The moment the influence difference between enemy and player layer is lowered their state goes back to chasing.
 
 **3-Enviroment awareness**
 
-[Take all data into account]
+Using every data available to make the best decision
+
+<video controls src="20260116-0951-31.7247053.mp4" title="Title"></video>
+
+Here you can see couple of AI agents that are combining fire and water layers to find the safest spot on map. Fire is danger and water is safe spots therefore, they find the vertex on map that has the highest difference between water and fire which means it's the safest spot.
 
 ---
 
@@ -297,16 +303,16 @@ Now AI agents can have a guess of where the player might be when they lose sight
 
 ### Summary
 
-Influence map is a technique that has been around for years to make ai more intelligence but slowly have been shifted and integrated to new techniques like sensory system, potential field, eqs system and...  
-Core concept and goal of all these techniques is to raise AI's awareness; therefore, it acts smarter and more "human". Simply, the more useful data you insert NPCs, the smarter they get and influence map is a way of doing this.
+Influence map is a technique that has been around for years to make ai more intelligent but slowly shifted and integrated to new techniques like sensory system, potential field, eqs system and...  
+Core concept and goal of all these techniques is to raise AI's awareness; therefore, it acts smarter and more "human". Simply, the more useful data you insert into NPCs, the smarter they get and influence map is a way of doing this.
 
-My system is designed for the BEE engine with my own navmesh, but if the influence map can operate on other navmeshes as wall with sufficient interfaces that allows influence map to extract data from navmesh. Current implementation provides influence map that can be used on further games developed on the BEE engine and I should be able to easily integrate it into other engines if needed. With simple interfaces user can conveniently benefit from influence map in their games to make their ai navigate more natural and behave smarter.
+My system is designed for the BEE engine with my own navmesh. However, the influence map can operate on other navmeshes as well, provided they expose sufficient interfaces for data extraction. Current implementation provides influence map that can be used on further games developed on the BEE engine and I should be able to easily integrate it into other engines if needed. With simple interfaces user can conveniently benefit from influence map in their games to make their ai navigate more natural and behave smarter.
 
-However, the important note is that implenting influence map and even its usage requires lots of tweaking and choices (Such as the map, how the influence affects AI, propagation parameter and ...) therefore, it's good to consider this and do lots of tests to come up with your own desired design.
+However, the important note is that implementing influence map and even its usage requires lots of tweaking and choices (Such as the map, how the influence affects AI, propagation parameter and ...) therefore, it's good to consider this and do lots of tests to come up with your own desired design.
 
 ### Future Work
 
-One of the improvement you can consider is converting other kinds of data into influence. Like player's velocity, terrains and even player's tactical options, such as the chance of hiding behind somewhere or placing a trap. Basically the more data you can turn into influence, the more options you have to make AI more intelligence.
+One of the improvement you can consider is converting other kinds of data into influence. Like player's velocity, terrains and even player's tactical options, such as the chance of hiding behind somewhere or placing a trap. Basically the more data you can turn into influence, the more options you have to make AI more intelligent.
 
 Machine learning can also be something to look into. Didn't have the time to look into it myself, but it was one of my stretch goals. Integrating influence map and machine learning can result into predicting player's behavior like boss fights that adapt to your play style, the more you fight it.
 
